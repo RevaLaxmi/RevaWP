@@ -1,39 +1,39 @@
-// src/components/HomeContent.tsx
-import FlipCard from "./FlipCard";
+'use client';
 
-const HomeContent = () => {
-  const cardStyles = [
-    { width: "30vw", height: "40vh" },
-    { width: "30vw", height: "40vh" },
-    { width: "30vw", height: "40vh" },
-    { width: "30vw", height: "40vh" },
-    { width: "30vw", height: "40vh" },
-    { width: "30vw", height: "40vh" },
-  ];
+import React from 'react';
+import FlipCard from './FlipCard';
 
+const HomeContent: React.FC = () => {
   return (
     <div
       style={{
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "center",
-        alignItems: "center",
-        gap: "1vw",
-        width: "100vw",
-        height: "100vh",
-        padding: "1vw",
-        boxSizing: "border-box",
-        overflow: "auto", // in case it overflows slightly
+        display: 'flex',
+        flexDirection: 'row',
+        width: '100vw',
+        height: 'calc(100vh - 60px)', // Adjust this value according to your navigation bar height
+        gap: '1rem',
+        padding: '1rem',
+        boxSizing: 'border-box',
+        marginTop: '60px', // Push content down from the navbar
       }}
     >
-      {cardStyles.map((style, idx) => (
-        <FlipCard
-          key={idx}
-          front={<div style={{ fontSize: "1.8vw" }}>Card {idx + 1} Front</div>}
-          back={<div style={{ fontSize: "1.8vw" }}>Card {idx + 1} Back</div>}
-          style={style}
-        />
-      ))}
+      {/* Column 1 */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <FlipCard front="Q1" back="A1" style={{ width: '100%', height: '350px' }} />
+        <FlipCard front="Q2" back="A2" style={{ width: '100%', height: '250px' }} />
+        <FlipCard front="Q3" back="A3" style={{ width: '100%', height: '160px' }} />
+      </div>
+
+      {/* Column 2 */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <FlipCard front="Q4" back="A4" style={{ width: '100%', height: '500px' }} />
+        <FlipCard front="Q5" back="A5" style={{ width: '100%', height: '275px' }} />
+      </div>
+
+      {/* Column 3 */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <FlipCard front="Q6" back="A6" style={{ width: '100%', height: '790px' }} />
+      </div>
     </div>
   );
 };

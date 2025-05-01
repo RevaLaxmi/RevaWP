@@ -1,36 +1,49 @@
-// src/components/FlipCard.tsx
-import React, { useState } from "react";
-import ReactCardFlip from "react-card-flip";
+'use client';
 
-type FlipCardProps = {
-  front: React.ReactNode;
-  back: React.ReactNode;
+import React from 'react';
+import ReactCardFlip from 'react-card-flip';
+
+interface FlipCardProps {
+  front: string;
+  back: string;
   style?: React.CSSProperties;
-};
+}
 
 const FlipCard: React.FC<FlipCardProps> = ({ front, back, style }) => {
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [isFlipped, setIsFlipped] = React.useState(false);
 
-  const handleClick = () => setIsFlipped(!isFlipped);
-
-  const cardStyle: React.CSSProperties = {
-    backgroundColor: "#f5f5f5",
-    borderRadius: "12px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    cursor: "pointer",
-    boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-    transition: "transform 0.3s ease",
-    ...style, // dynamic sizing comes from parent
+  const handleClick = () => {
+    setIsFlipped(!isFlipped);
   };
 
   return (
     <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
-      <div onClick={handleClick} style={cardStyle}>
+      <div
+        onClick={handleClick}
+        style={{
+          ...style,
+          backgroundColor: '#f0f0f0',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: '8px',
+          cursor: 'pointer',
+        }}
+      >
         {front}
       </div>
-      <div onClick={handleClick} style={{ ...cardStyle, backgroundColor: "#e0e0e0" }}>
+      <div
+        onClick={handleClick}
+        style={{
+          ...style,
+          backgroundColor: '#d0d0d0',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: '8px',
+          cursor: 'pointer',
+        }}
+      >
         {back}
       </div>
     </ReactCardFlip>
