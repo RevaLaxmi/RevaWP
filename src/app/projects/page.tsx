@@ -1,10 +1,13 @@
-export default function About() {
+// src/app/projects/page.tsx
+
+import React from 'react';
+import ProjectsGrid from '@/components/ProjectsGrid'; // Ensure the path is correct
+
+export default function ProjectsPage() {
   return (
-    <div className="h-full flex items-center justify-center text-center">
-      <div>
-        <h2 className="text-4xl font-bold">About Me</h2>
-        <p className="mt-4 text-lg">I’m Reva, a developer, designer, aerialist, and much more!</p>
-      </div>
+    <div style={{ padding: '2rem' }}>
+      <h1>My Projects</h1>
+      <ProjectsGrid />
     </div>
   );
 }
