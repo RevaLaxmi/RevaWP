@@ -1,48 +1,55 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const SpotlightReveal: React.FC = () => {
-  const [pos, setPos] = useState({ x: 50, y: 50 });
+  const [mousePosition, setMousePosition] = useState({ x: -9999, y: -9999 }); // start off-screen
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    setPos({ x, y });
-  };
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   return (
     <div
-      onMouseMove={handleMouseMove}
       style={{
-        height: '100vh',
-        background: 'white',
-        color: 'black',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '2rem',
         position: 'relative',
+        height: '100vh',
+        backgroundColor: 'white',
+        color: 'black',
         overflow: 'hidden',
       }}
     >
+      {/* The text layer, hidden by default */}
       <div
         style={{
-          padding: '2rem',
-          textAlign: 'center',
-          color: 'black',
-          maskImage: `radial-gradient(circle at ${pos.x}% ${pos.y}%, black 100px, transparent 150px)`,
-          WebkitMaskImage: `radial-gradient(circle at ${pos.x}% ${pos.y}%, black 100px, transparent 150px)`,
-          transition: 'mask-image 0.1s, -webkit-mask-image 0.1s',
+          position: 'absolute',
+          inset: 0,
+          padding: '3rem',
+          fontSize: '1.5rem',
+          backgroundColor: 'black',
+          color: 'white',
+          maskImage: `radial-gradient(circle 150px at ${mousePosition.x}px ${mousePosition.y}px, white 0%, transparent 100%)`,
+          WebkitMaskImage: `radial-gradient(circle 150px at ${mousePosition.x}px ${mousePosition.y}px, white 0%, transparent 100%)`,
+          transition: 'mask-image 0.1s ease',
         }}
       >
-        <p>✨ I’m Reva — a dancer, developer, and dreamer.</p>
-        <p>🛠️ I build tools that blend beauty with logic.</p>
-        <p>📍 Hover to discover more about me.</p>
+        <p>Hey there, I'm Reva 👋</p>
+        <p>This section lights up as you explore it with your mouse.</p>
+        <p>You're reading this through a "contrast circle" effect.</p>
+        <p>✨ Neat, right?</p>
+      </div>
+
+      {/* Optional: white background for fallback */}
+      <div style={{ padding: '3rem', fontSize: '1.5rem', opacity: 0 }}>
+        <p>Fallback text if masking is unsupported</p>
       </div>
     </div>
   );
 };
 
 export default SpotlightReveal;
+
