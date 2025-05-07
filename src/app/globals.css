@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -74,76 +75,111 @@ a:hover {
 
 
 
-
-
-
-.arcade-container {
-  font-family: 'Press Start 2P', cursive;
-  background-color: #ffffff;
-  color: #000000;
-  padding: 2rem;
+/* Cyberpunk Grid */
+.cyber-container {
+  position: relative;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  background-image: radial-gradient(rgba(140, 0, 255, 0.133), transparent), url('/grid-bg.png'); /* optional neon grid */
-  background-size: cover;
+  align-items: center;
+  background: rgb(255, 255, 255);
+  overflow: hidden;
+}
+
+.cyber-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background: repeating-linear-gradient(
+      #b300ff 0px,
+      #b300ff 1px,
+      transparent 1px,
+      transparent 20px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      #b300ff 0px,
+      #b300ff 1px,
+      transparent 1px,
+      transparent 20px
+    );
+  animation: scrollGrid 30s linear infinite;
+  opacity: 0.06;
+  z-index: 0;
+}
+
+@keyframes scrollGrid {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-100px, -100px, 0);
+  }
+}
+
+/* Cyber Glass Panel */
+.cyber-glass {
+  position: relative;
+  z-index: 10;
+  background: rgb(255, 255, 255);
+  border: 1px solid #b300ff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 20px #b300ff;
+  width: 90%;
+  max-width: 500px;
+  backdrop-filter: blur(6px);
+}
+
+/* Cyberpunk Title */
+.cyber-title {
+  font-size: 1.6rem;
+  color: #b300ff;
+  margin-bottom: 1rem;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 2px;
   text-align: center;
 }
 
-.arcade-title {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
+/* Label */
+.cyber-label {
+  color: #b300ff;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  display: block;
+  font-family: 'Share Tech Mono', monospace;
 }
 
-.arcade-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+/* Inputs and Textarea */
+.cyber-input {
   width: 100%;
-  max-width: 500px;
+  padding: 0.75rem;
+  background: rgb(255, 255, 255);
+  color: #b300ff;
+  border: 1px solid #b300ff;
+  border-radius: 6px;
+  font-family: 'Share Tech Mono', monospace;
+  margin-top: 0.3rem;
 }
 
-.arcade-form label {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-}
-
-.arcade-form input,
-.arcade-form textarea {
-  background-color: #ffffff;
-  border: 2px solid rgb(162, 0, 255);
-  color: rgb(187, 0, 255);
-  padding: 0.8rem;
-  font-family: 'Press Start 2P', cursive;
-  font-size: 0.7rem;
-  resize: none;
-}
-
-.arcade-button {
+/* Button */
+.cyber-button {
   margin-top: 1.5rem;
-  padding: 1rem;
-  background-color: rgb(153, 0, 255);
-  color: #ffffff;
-  font-family: 'Press Start 2P', cursive;
-  border: 2px solid #fff;
+  background: #b300ff;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  padding: 0.75rem;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 1px;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: background 0.2s ease;
 }
 
-.arcade-button:hover {
-  transform: scale(1.1);
-}
-
-.arcade-complete {
-  font-size: 1rem;
-  color: rgb(136, 0, 255);
-  animation: blink 0.8s infinite alternate;
-}
-
-@keyframes blink {
-  from { opacity: 1; }
-  to { opacity: 0.4; }
+.cyber-button:hover {
+  background: #00ccdd;
 }

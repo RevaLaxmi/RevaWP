@@ -1,4 +1,4 @@
-import TerminalContact from '@/components/TerminalContact';
+import TerminalContact from '@/components/ContactCyberpunk';
 
 export default function ContactPage() {
   return (
