@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -70,54 +71,79 @@ a:hover {
 
 
 
-/* Terminal-style contact page */
-.terminal-container {
-  background-color: #000;
-  color: #00ff00;
-  font-family: 'Courier New', Courier, monospace;
+
+
+
+
+
+
+.arcade-container {
+  font-family: 'Press Start 2P', cursive;
+  background-color: #ffffff;
+  color: #000000;
   padding: 2rem;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  background-image: radial-gradient(rgba(140, 0, 255, 0.133), transparent), url('/grid-bg.png'); /* optional neon grid */
+  background-size: cover;
+  text-align: center;
 }
 
-pre {
-  margin: 0;
-  font-size: 1rem;
+.arcade-title {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
 }
 
-form {
+.arcade-form {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-}
-
-input,
-textarea {
-  background: none;
-  border: none;
-  border-bottom: 1px solid #00ff00;
-  color: #00ff00;
-  font-family: inherit;
-  font-size: 1rem;
-  outline: none;
-  padding: 0.2rem;
+  gap: 1.5rem;
   width: 100%;
+  max-width: 500px;
 }
 
-button {
-  background: none;
-  border: 1px solid #00ff00;
-  color: #00ff00;
-  padding: 0.5rem 1rem;
+.arcade-form label {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.arcade-form input,
+.arcade-form textarea {
+  background-color: #ffffff;
+  border: 2px solid rgb(162, 0, 255);
+  color: rgb(187, 0, 255);
+  padding: 0.8rem;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7rem;
+  resize: none;
+}
+
+.arcade-button {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: rgb(153, 0, 255);
+  color: #ffffff;
+  font-family: 'Press Start 2P', cursive;
+  border: 2px solid #fff;
   cursor: pointer;
-  font-family: inherit;
-  margin-top: 1rem;
-  width: fit-content;
+  transition: transform 0.2s ease;
 }
 
-button:hover {
-  background-color: #00ff00;
-  color: #000;
+.arcade-button:hover {
+  transform: scale(1.1);
+}
+
+.arcade-complete {
+  font-size: 1rem;
+  color: rgb(136, 0, 255);
+  animation: blink 0.8s infinite alternate;
+}
+
+@keyframes blink {
+  from { opacity: 1; }
+  to { opacity: 0.4; }
 }

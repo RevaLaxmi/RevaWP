@@ -1,44 +1,50 @@
-'use client';
+"use client";
+import { useState } from "react";
 
-import { useState } from 'react';
-
-export default function TerminalContact() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
+export default function ArcadeContact() {
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  function handleChange(e: any) {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  function handleSubmit(e: any) {
     e.preventDefault();
-    // Here you can integrate EmailJS, Formspree, or your API route
     setSubmitted(true);
-  };
+    // fake send delay
+    setTimeout(() => {
+      alert("LEVEL COMPLETE 🕹️\nMessage sent!");
+    }, 800);
+  }
 
   return (
-    <div className="terminal-container">
-      <pre>$ whoami</pre>
-      <pre>Reva Chauhan</pre>
+    <div className="arcade-container">
+      <h1 className="arcade-title">CONTACT PLAYER 1</h1>
 
-      <pre>$ contact --email</pre>
-      <pre>reva.chauhan1@gmail.com</pre>
+      {!submitted ? (
+        <form onSubmit={handleSubmit} className="arcade-form">
+          <label>
+            NAME:
+            <input name="name" value={form.name} onChange={handleChange} />
+          </label>
+          <label>
+            EMAIL:
+            <input name="email" value={form.email} onChange={handleChange} />
+          </label>
+          <label>
+            MESSAGE:
+            <textarea name="message" value={form.message} onChange={handleChange} />
+          </label>
 
-      <pre>$ send-message</pre>
-      <form onSubmit={handleSubmit}>
-        <label>
-          [Name] &gt; <input type="text" name="name" value={form.name} onChange={handleChange} required />
-        </label>
-        <label>
-          [Email] &gt; <input type="email" name="email" value={form.email} onChange={handleChange} required />
-        </label>
-        <label>
-          [Message] &gt; <textarea name="message" rows={4} value={form.message} onChange={handleChange} required />
-        </label>
-        <button type="submit">$ submit</button>
-      </form>
-
-      {submitted && <pre>✔ Message sent!</pre>}
+          <button type="submit" className="arcade-button">
+            PRESS START TO SEND
+          </button>
+        </form>
+      ) : (
+        <p className="arcade-complete">🕹️ LEVEL COMPLETE 🕹️</p>
+      )}
     </div>
   );
 }
