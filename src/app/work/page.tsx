@@ -1,10 +1,10 @@
-export default function About() {
+import WorkMindMap from '@/components/WorkMindMap';
+
+export default function WorkPage() {
   return (
-    <div className="h-full flex items-center justify-center text-center">
-      <div>
-        <h2 className="text-4xl font-bold">About Me</h2>
-        <p className="mt-4 text-lg">I’m Reva, a developer, designer, aerialist, and much more!</p>
-      </div>
+    <div className="min-h-screen bg-black text-white p-6">
+      <h1 className="text-3xl font-bold mb-8">🧠 Current Missions</h1>
+      <WorkMindMap />
     </div>
   );
 }
