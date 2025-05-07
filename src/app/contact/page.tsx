@@ -1,5 +1,9 @@
-import PickMyBrain from '@/components/PickMyBrain';
+import TerminalContact from '@/components/TerminalContact';
 
 export default function ContactPage() {
-  return <PickMyBrain />;
+  return (
+    <main>
+      <TerminalContact />
+    </main>
+  );
 }

@@ -5,6 +5,7 @@ import './globals.css';
 import RootWrapper from '../components/RootWrapper';
 import Landing from '../components/Landing';
 import { ReactNode, useState } from 'react';
+import './globals.css';
 
 
 export default function RootLayout({ children }: { children: ReactNode }) {
