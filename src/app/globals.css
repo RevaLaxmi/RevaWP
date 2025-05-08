@@ -13,7 +13,7 @@ html, body {
   height: 100%; /* Ensures the body takes up full height */
   overflow: hidden; /* Disables both vertical and horizontal scrolling */
   font-family: 'Courier New', monospace;
-  background-color: #F5F5F5 ;
+  background-color: 'pink' ;
 }
 
 /* Prevent overflow in main content area */
@@ -25,15 +25,16 @@ main {
 
 /* Make header sticky at the top */
 header {
-  position: fixed; /* Fixes the header at the top */
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  background-color: white;
+  background-color: transparent;
   padding: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional: adds shadow to header */
+  box-shadow: none;
 }
+
 
 /* Set style for the header content */
 header .logo {

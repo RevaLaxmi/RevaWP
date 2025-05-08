@@ -14,14 +14,14 @@ const HomeContent: React.FC = () => {
         gap: '1rem',
         padding: '1rem',
         boxSizing: 'border-box',
-        marginTop: '40px', // Push content down from the navbar
+        marginTop: '-11px', // Push content down from the navbar
       }}
     >
       {/* Column 1 */}
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         <FlipCard front="Q1" back="A1" style={{ width: '100%', height: '350px' }} />
         <FlipCard front="Q2" back="A2" style={{ width: '100%', height: '250px' }} />
-        <FlipCard front="Q3" back="A3" style={{ width: '100%', height: '190px' }} />
+        <FlipCard front="Q3" back="A3" style={{ width: '100%', height: '240px' }} />
       </div>
 
       {/* Column 2 */}
@@ -40,14 +40,14 @@ const HomeContent: React.FC = () => {
             />
           }
           back="A4"
-          style={{ width: '100%', height: '530px' }}
+          style={{ width: '100%', height: '580px' }}
         />
         <FlipCard front="Q5" back="A5" style={{ width: '100%', height: '275px' }} />
       </div>
 
       {/* Column 3 */}
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <FlipCard front="Q6" back="A6" style={{ width: '100%', height: '820px' }} />
+        <FlipCard front="Q6" back="A6" style={{ width: '100%', height: '870px' }} />
       </div>
     </div>
   );

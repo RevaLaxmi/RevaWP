@@ -22,7 +22,7 @@ const FlipCard: React.FC<FlipCardProps> = ({ front, back, style }) => {
         onClick={handleClick}
         style={{
           ...style,
-          backgroundColor: '#FFD6E8',
+          backgroundColor: '#FFB6C1',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',

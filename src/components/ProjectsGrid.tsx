@@ -1,6 +1,4 @@
-// src/components/ProjectsGrid.tsx
-
-'use client'; // Add this line at the top
+'use client';
 
 import React, { useState } from 'react';
 
@@ -12,6 +10,9 @@ const projects = [
   { id: 4, title: "Blockchain DApp", description: "A decentralized application built with Ethereum and Solidity.", tags: ['Blockchain', 'Web'], link: "https://github.com/blockchain-dapp" },
   { id: 5, title: "AI Image Classifier", description: "A deep learning model for image classification.", tags: ['AI', 'Deep Learning'], link: "https://github.com/ai-image-classifier" },
   { id: 6, title: "Weather App", description: "A weather forecasting app using React and OpenWeather API.", tags: ['Web', 'UI/UX'], link: "https://github.com/weather-app" },
+  { id: 7, title: "Blockchain DApp", description: "A decentralized application built with Ethereum and Solidity.", tags: ['Blockchain', 'Web'], link: "https://github.com/blockchain-dapp" },
+  { id: 8, title: "AI Image Classifier", description: "A deep learning model for image classification.", tags: ['AI', 'Deep Learning'], link: "https://github.com/ai-image-classifier" },
+  { id: 9, title: "Weather App", description: "A weather forecasting app using React and OpenWeather API.", tags: ['Web', 'UI/UX'], link: "https://github.com/weather-app" }
 ];
 
 const availableTags = ['All', 'AI', 'Web', 'UI/UX', 'Machine Learning', 'Blockchain', 'Backend', 'Deep Learning'];
@@ -31,54 +32,74 @@ const ProjectsGrid: React.FC = () => {
   };
 
   return (
-    <div>
-      {/* Filter Bar */}
-      <div style={{ marginBottom: '20px', display: 'flex', gap: '10px' }}>
-        {availableTags.map(tag => (
-          <button
-            key={tag}
-            onClick={() => handleTagClick(tag)}
-            style={{
-              padding: '8px 16px',
-              border: '1px solid #ccc',
-              backgroundColor: selectedTag === tag ? '#4CAF50' : '#f0f0f0',
-              color: selectedTag === tag ? 'white' : 'black',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              fontWeight: 'bold',
-            }}
-          >
-            {tag}
-          </button>
-        ))}
-      </div>
+    <div style={{ position: 'relative', padding: '40px 20px', maxWidth: '1200px', margin: '0 auto', overflow: 'hidden' }}>
+      {/* Background Particles */}
+      {/* Main Content */}
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        {/* Filter Bar */}
+        <div style={{ marginBottom: '30px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '12px' }}>
+          {availableTags.map(tag => (
+            <button
+              key={tag}
+              onClick={() => handleTagClick(tag)}
+              style={{
+                padding: '10px 20px',
+                border: '1px solid #FFB6C1', // Pink border for unselected tags
+                backgroundColor: selectedTag === tag ? '#FFB6C1' : 'white', // Pink background for selected tag
+                color: selectedTag === tag ? 'white' : '#333',
+                borderRadius: '20px',
+                cursor: 'pointer',
+                fontWeight: '600',
+                transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={e => (e.currentTarget.style.backgroundColor = selectedTag === tag ? '#FFB6C1' : '#FFB6C1')} // Hover pink shade
+              onMouseLeave={e => (e.currentTarget.style.backgroundColor = selectedTag === tag ? '#FFB6C1' : 'white')} // Revert to white when not selected
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
 
-      {/* Project Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '20px' }}>
-        {filterProjects(selectedTag).map(project => (
-          <div
-            key={project.id}
-            style={{
-              padding: '20px',
-              border: '1px solid #ddd',
-              borderRadius: '8px',
-              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-              backgroundColor: 'white',
-              transition: 'transform 0.3s ease',
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-          >
-            <h3>{project.title}</h3>
-            <p>{project.description}</p>
-            <div>
-              <strong>Tags: </strong>{project.tags.join(', ')}
+        {/* Project Grid */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+          gap: '32px',
+          justifyItems: 'center',
+        }}>
+          {filterProjects(selectedTag).map(project => (
+            <div
+              key={project.id}
+              style={{
+                padding: '20px',
+                border: '1px solid #ddd',
+                borderRadius: '12px',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+                backgroundColor: 'white',
+                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                width: '100%',
+                maxWidth: '320px',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.03)';
+                e.currentTarget.style.boxShadow = '0 6px 20px rgb(255, 182, 193)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'scale(1)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+              }}
+            >
+              <h3 style={{ marginBottom: '10px' }}>{project.title}</h3>
+              <p style={{ marginBottom: '10px', color: '#555' }}>{project.description}</p>
+              <div style={{ fontSize: '0.9rem', marginBottom: '10px' }}>
+                <strong>Tags:</strong> {project.tags.join(', ')}
+              </div>
+              <a href={project.link} target="_blank" rel="noopener noreferrer" style={{ color: '#FFB6C1', textDecoration: 'none', fontWeight: 'bold' }}>
+                View Project →
+              </a>
             </div>
-            <a href={project.link} target="_blank" style={{ color: '#007bff', textDecoration: 'none' }}>
-              View Project
-            </a>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
