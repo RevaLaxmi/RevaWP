@@ -6,7 +6,7 @@ import ProjectsGrid from '@/components/ProjectsGrid'; // Ensure the path is corr
 export default function ProjectsPage() {
   return (
     <div style={{ padding: '2rem' }}>
-      <h1>My Projects</h1>
+      <h1></h1>
       <ProjectsGrid />
     </div>
   );

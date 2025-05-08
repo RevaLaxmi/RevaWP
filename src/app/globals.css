@@ -13,7 +13,7 @@ html, body {
   height: 100%; /* Ensures the body takes up full height */
   overflow: hidden; /* Disables both vertical and horizontal scrolling */
   font-family: 'Courier New', monospace;
-  background-color: #fafafa;
+  background-color: #F5F5F5 ;
 }
 
 /* Prevent overflow in main content area */
