@@ -4,8 +4,8 @@ import React from 'react';
 import ReactCardFlip from 'react-card-flip';
 
 interface FlipCardProps {
-  front: string;
-  back: string;
+  front: React.ReactNode; // instead of `string`
+  back: React.ReactNode;
   style?: React.CSSProperties;
 }
 
@@ -22,7 +22,7 @@ const FlipCard: React.FC<FlipCardProps> = ({ front, back, style }) => {
         onClick={handleClick}
         style={{
           ...style,
-          backgroundColor: '#f0f0f0',
+          backgroundColor: '#FFB6C1',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -36,7 +36,7 @@ const FlipCard: React.FC<FlipCardProps> = ({ front, back, style }) => {
         onClick={handleClick}
         style={{
           ...style,
-          backgroundColor: '#d0d0d0',
+          backgroundColor: '#FFB6C1',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',

@@ -25,7 +25,7 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '20px',
-    backgroundColor: '#fff',
+    backgroundColor: 'pink',
     boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
   },
   logo: {

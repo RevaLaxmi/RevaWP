@@ -26,7 +26,22 @@ const HomeContent: React.FC = () => {
 
       {/* Column 2 */}
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        <FlipCard front="Q4" back="A4" style={{ width: '100%', height: '500px' }} />
+        <FlipCard
+          front={
+            <img
+              src="/revaimg.jpg"
+              alt="Q4 Image"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                borderRadius: '8px', // Rounded corners added here
+              }}
+            />
+          }
+          back="A4"
+          style={{ width: '100%', height: '500px' }}
+        />
         <FlipCard front="Q5" back="A5" style={{ width: '100%', height: '275px' }} />
       </div>
 
