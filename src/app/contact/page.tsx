@@ -1,9 +1,13 @@
-import TerminalContact from '@/components/ContactCyberpunk';
+// page.tsx
+import React from "react";
+import Cube from "@/components/cube";
 
-export default function ContactPage() {
+const ContactPage: React.FC = () => {
   return (
-    <main>
-      <TerminalContact />
-    </main>
+    <div>
+      <Cube />
+    </div>
   );
-}
+};
+
+export default ContactPage;
