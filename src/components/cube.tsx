@@ -12,11 +12,10 @@ const Cube: React.FC = () => {
   const autoRotate = useRef(true);
   const animationFrameId = useRef<number>();
 
-  // Auto-rotation logic
   useEffect(() => {
     const rotateCube = () => {
       if (autoRotate.current && cubeRef.current) {
-        rotation.current.y += 0.2; // slower rotation speed
+        rotation.current.y += 0.2;
         gsap.set(cubeRef.current, {
           rotateY: rotation.current.y,
           rotateX: rotation.current.x,
@@ -32,7 +31,6 @@ const Cube: React.FC = () => {
     };
   }, []);
 
-  // Drag control logic
   useEffect(() => {
     const handleMouseDown = (e: MouseEvent) => {
       isDragging.current = true;
@@ -79,9 +77,19 @@ const Cube: React.FC = () => {
         <div className="face front">Aerial Classes</div>
         <div className="face back">Project Collaborations</div>
         <div className="face left">Client Sessions</div>
-        <div className="face right">Email: reva.chauhan1@gmail.com</div>
-        <div className="face top">Phone: +91 97736 39004</div>
+        <div className="face right">reva.chauhan1@gmail.com</div>
+        <div className="face top">+91 97736 39004</div>
         <div className="face bottom">Instagram: @revalaxmi</div>
+      </div>
+
+      {/* Buttons below the cube */}
+      <div className="cube-buttons">
+        <button>Aerial Classes</button>
+        <button>Project Collaborations</button>
+        <button>Client Sessions</button>
+        <button>Email</button>
+        <button>Phone</button>
+        <button>Instagram</button>
       </div>
     </div>
   );

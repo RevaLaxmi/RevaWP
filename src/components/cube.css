@@ -1,46 +1,80 @@
+/* Cube container */
 .cube-container {
-    perspective: 1000px; /* Gives depth to the cube */
+    perspective: 1000px;
     width: 100%;
-    height: 100vh; /* You can adjust this for mobile responsiveness */
+    height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    padding-top: 230px;
   }
   
+  /* Cube style - scaled down to 2/3 size (was 300px → now 200px) */
   .cube {
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
     position: relative;
     transform-style: preserve-3d;
     transform: rotateX(0deg) rotateY(0deg);
+    cursor: grab;
+    transition: transform 0.2s ease-out;
   }
   
+  /* Cube face style */
   .face {
     position: absolute;
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
     background-color: #fff;
     border: 2px solid #000;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.5rem;
+    font-size: 0.8rem;
     font-family: 'Chakra Petch', sans-serif;
+    color: black;
+    transition: box-shadow 0.3s ease;
   }
   
-  .front  { transform: translateZ(150px); background: #f8b400; }
-  .back   { transform: rotateY(180deg) translateZ(150px); background: #ff6347; }
-  .left   { transform: rotateY(-90deg) translateZ(150px); background: #20b2aa; }
-  .right  { transform: rotateY(90deg) translateZ(150px); background: #6495ed; }
-  .top    { transform: rotateX(90deg) translateZ(150px); background: #8a2be2; }
-  .bottom { transform: rotateX(-90deg) translateZ(150px); background: #ff4500; }
+  /* Face positions (translateZ = half of cube size) */
+  .front  { transform: translateZ(100px); }
+  .back   { transform: rotateY(180deg) translateZ(100px); }
+  .left   { transform: rotateY(-90deg) translateZ(100px); }
+  .right  { transform: rotateY(90deg) translateZ(100px); }
+  .top    { transform: rotateX(90deg) translateZ(100px); }
+  .bottom { transform: rotateX(-90deg) translateZ(100px); }
   
-  .cube {
-    cursor: grab;
-    transition: transform 0.2s ease-out;
+  .face:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
   }
   
   .cube:active {
     cursor: grabbing;
+  }
+  
+  /* Buttons below the cube */
+  .cube-buttons {
+    margin-top: 200px; /* Increased from 30px to 100px */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  
+  .cube-buttons button {
+    background-color: black;
+    color: white;
+    font-family: 'Chakra Petch', sans-serif;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .cube-buttons button:hover {
+    background-color: #333;
   }
   
