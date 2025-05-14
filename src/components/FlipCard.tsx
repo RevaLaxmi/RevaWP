@@ -26,7 +26,7 @@ const FlipCard: React.FC<FlipCardProps> = ({ front, back, style }) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          borderRadius: '8px',
+          borderRadius: '20px',
           cursor: 'pointer',
         }}
       >
@@ -40,7 +40,7 @@ const FlipCard: React.FC<FlipCardProps> = ({ front, back, style }) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          borderRadius: '8px',
+          borderRadius: '20px',
           cursor: 'pointer',
         }}
       >
