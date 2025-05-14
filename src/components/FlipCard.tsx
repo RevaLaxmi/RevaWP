@@ -32,6 +32,7 @@ const FlipCard: React.FC<FlipCardProps> = ({ front, back, style }) => {
     lineHeight: isText(content) ? '1.1' : 'initial',
     boxSizing: 'border-box',
     overflow: 'hidden',
+    position: 'relative',
   });
 
   return (
