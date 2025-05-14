@@ -35,3 +35,12 @@
   .top    { transform: rotateX(90deg) translateZ(150px); background: #8a2be2; }
   .bottom { transform: rotateX(-90deg) translateZ(150px); background: #ff4500; }
   
+  .cube {
+    cursor: grab;
+    transition: transform 0.2s ease-out;
+  }
+  
+  .cube:active {
+    cursor: grabbing;
+  }
+  
