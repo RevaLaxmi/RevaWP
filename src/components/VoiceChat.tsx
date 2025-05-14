@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-
+//@ts-ignore
 const SpeechRecognition = typeof window !== 'undefined' && (window.SpeechRecognition || window.webkitSpeechRecognition);
 
 const VoiceChat = () => {
@@ -27,6 +27,7 @@ const VoiceChat = () => {
     recognition.lang = 'en-US';
 
     recognition.onstart = () => console.log('🎙️ Listening...');
+    //@ts-ignore
     recognition.onresult = (event: SpeechRecognitionEvent) => {
       const transcript = event.results[event.results.length - 1][0].transcript;
       console.log('🎧 Heard:', transcript);

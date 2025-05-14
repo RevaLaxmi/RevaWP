@@ -1,10 +1,12 @@
+'use client';
+
 import React from 'react';
-import VoiceChat from '@/components/VoiceChat';
+import VoiceJumperGame from '@/components/VoiceJumperGame';
 
 const ChatPage = () => {
   return (
     <div>
-      <VoiceChat />
+      <VoiceJumperGame />
     </div>
   );
 };
