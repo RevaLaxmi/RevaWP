@@ -1,0 +1,10 @@
+.circle {
+    position: relative;
+    width: 150px; /* Adjust initial size */
+    height: 150px; /* Same as width to maintain a circle shape */
+    background-color: #0077b6;
+    border-radius: 50%;
+    margin: 20px auto;
+    transition: transform 1s ease;
+  }
+  

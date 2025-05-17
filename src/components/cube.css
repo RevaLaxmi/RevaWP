@@ -1,80 +1,96 @@
-/* Cube container */
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&family=Orbitron:wght@500&display=swap');
+
 .cube-container {
-    perspective: 1000px;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 230px;
+  perspective: 1000px;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffccd5, #ffc1e3); /* Light pink to baby pink */
+  background-size: 200% 200%;
+  animation: bgShift 10s ease infinite;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 230px;
+}
+
+@keyframes bgShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.cube {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(0deg) rotateY(0deg);
+  cursor: grab;
+  transition: transform 0.2s ease-out;
+}
+
+.face {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(135deg, #ffccd5, #ffc1e3); /* Matching background */
+  border: 1px solid #ffffff; /* White border */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.85rem;
+  font-family: 'Orbitron', sans-serif;
+  color: #000000;
+  animation: pulseGlow 2s infinite ease-in-out;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4); /* Soft white glow */
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
   }
-  
-  /* Cube style - scaled down to 2/3 size (was 300px → now 200px) */
-  .cube {
-    width: 200px;
-    height: 200px;
-    position: relative;
-    transform-style: preserve-3d;
-    transform: rotateX(0deg) rotateY(0deg);
-    cursor: grab;
-    transition: transform 0.2s ease-out;
+  50% {
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.7);
   }
-  
-  /* Cube face style */
-  .face {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    background-color: #fff;
-    border: 2px solid #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.8rem;
-    font-family: 'Chakra Petch', sans-serif;
-    color: black;
-    transition: box-shadow 0.3s ease;
-  }
-  
-  /* Face positions (translateZ = half of cube size) */
-  .front  { transform: translateZ(100px); }
-  .back   { transform: rotateY(180deg) translateZ(100px); }
-  .left   { transform: rotateY(-90deg) translateZ(100px); }
-  .right  { transform: rotateY(90deg) translateZ(100px); }
-  .top    { transform: rotateX(90deg) translateZ(100px); }
-  .bottom { transform: rotateX(-90deg) translateZ(100px); }
-  
-  .face:hover {
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-  }
-  
-  .cube:active {
-    cursor: grabbing;
-  }
-  
-  /* Buttons below the cube */
-  .cube-buttons {
-    margin-top: 200px; /* Increased from 30px to 100px */
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-  }
-  
-  
-  .cube-buttons button {
-    background-color: black;
-    color: white;
-    font-family: 'Chakra Petch', sans-serif;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 6px;
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .cube-buttons button:hover {
-    background-color: #333;
-  }
-  
+}
+
+.front  { transform: translateZ(100px); }
+.back   { transform: rotateY(180deg) translateZ(100px); }
+.left   { transform: rotateY(-90deg) translateZ(100px); }
+.right  { transform: rotateY(90deg) translateZ(100px); }
+.top    { transform: rotateX(90deg) translateZ(100px); }
+.bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+.face:hover {
+  box-shadow: 0 0 30px #ffffff;
+}
+
+.cube:active {
+  cursor: grabbing;
+}
+
+.cube-buttons {
+  margin-top: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.cube-buttons button {
+  background-color: #ff69b4;
+  color: #ffffff;
+  font-family: 'Chakra Petch', sans-serif;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+.cube-buttons button:hover {
+  background-color: #ff85c1;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+}
