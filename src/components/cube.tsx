@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from "react";
 import "./cube.css";
 import { gsap } from "gsap";
 
-// Feel-good STEM quotes with explanations
 const quotes = [
   {
     message: "✨ You're crushing it ✨",
@@ -78,10 +77,9 @@ const Cube: React.FC = () => {
     if (!cubeRef.current) return;
 
     autoRotate.current = false;
-    setSelectedQuote(null); // hide old quote
+    setSelectedQuote(null);
 
     const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-
     const x = Math.floor(Math.random() * 4) * 90;
     const y = Math.floor(Math.random() * 4) * 90;
 
@@ -96,27 +94,34 @@ const Cube: React.FC = () => {
       onComplete: () => {
         setTimeout(() => {
           setSelectedQuote(randomQuote);
-          autoRotate.current = true;
         }, 500);
       }
     });
   };
 
+  const handleRetry = () => {
+    setSelectedQuote(null);
+    autoRotate.current = true;
+  };
+
   return (
     <div className="cube-container">
-      <div className="cube" ref={cubeRef} onClick={handleCubeClick}>
-        <div className="face front"></div>
-        <div className="face back"></div>
-        <div className="face left"></div>
-        <div className="face right"></div>
-        <div className="face top"></div>
-        <div className="face bottom"></div>
-      </div>
+      {!selectedQuote && (
+        <div className="cube" ref={cubeRef} onClick={handleCubeClick}>
+          <div className="face front"></div>
+          <div className="face back"></div>
+          <div className="face left"></div>
+          <div className="face right"></div>
+          <div className="face top"></div>
+          <div className="face bottom"></div>
+        </div>
+      )}
 
       {selectedQuote && (
         <div className="quote-box">
           <h2 className="quote-message">{selectedQuote.message}</h2>
           <p className="quote-explanation">{selectedQuote.explanation}</p>
+          <button className="retry-button" onClick={handleRetry}>↻ New Quote</button>
         </div>
       )}
     </div>
