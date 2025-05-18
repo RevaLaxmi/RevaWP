@@ -107,3 +107,28 @@ body {
     transform: translateY(0);
   }
 }
+
+
+
+
+
+
+
+
+
+.enter-button {
+  margin-top: 12px;
+  padding: 10px 16px;
+  background: #00ffff;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.enter-button:hover {
+  background: #00bfbf;
+}
+

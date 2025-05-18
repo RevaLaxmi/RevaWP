@@ -3,48 +3,49 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./cube.css";
 import { gsap } from "gsap";
+import NeonGridWorld from "./NeonGridWorld"; // ✅ Import your 3D world
 
 const quotes = [
   {
     message: "✨ You're crushing it ✨",
-    explanation: "Every bug you fix and line you write brings you closer to mastery. Keep pushing forward!"
+    explanation: "Every bug you fix and line you write brings you closer to mastery. Keep pushing forward!",
   },
   {
     message: "Built with brain & heart 💡❤️",
-    explanation: "Great code isn’t just logic—it’s crafted with passion, empathy, and brilliance."
+    explanation: "Great code isn’t just logic—it’s crafted with passion, empathy, and brilliance.",
   },
   {
     message: "Debugging is love 🛠️",
-    explanation: "Finding bugs means you care enough to make it better. Debugging is part of the love story of engineering."
+    explanation: "Finding bugs means you care enough to make it better. Debugging is part of the love story of engineering.",
   },
   {
     message: "Keep building 💪",
-    explanation: "Your projects are your footprints in the digital world. Keep laying those bricks!"
+    explanation: "Your projects are your footprints in the digital world. Keep laying those bricks!",
   },
   {
     message: "Take a breath, you're doing great 🌸",
-    explanation: "Tech is intense—remember to pause, breathe, and appreciate how far you’ve come."
+    explanation: "Tech is intense—remember to pause, breathe, and appreciate how far you’ve come.",
   },
   {
     message: "Pixel perfect, heart full 💖",
-    explanation: "Design and logic blend when you create with love. And your users feel it!"
+    explanation: "Design and logic blend when you create with love. And your users feel it!",
   },
   {
     message: "You’re *the* main character 🎬",
-    explanation: "In your coding journey, you're the hero—navigating bugs, features, and breakthroughs."
+    explanation: "In your coding journey, you're the hero—navigating bugs, features, and breakthroughs.",
   },
   {
     message: "Code. Dance. Repeat 💃💻",
-    explanation: "Balance is key. Code hard, vibe harder. Creativity thrives when you’re playful too."
+    explanation: "Balance is key. Code hard, vibe harder. Creativity thrives when you’re playful too.",
   },
   {
     message: "Glitch? Nah, it's a feature 😉",
-    explanation: "Innovation often comes disguised as a glitch. Lean into unexpected outcomes."
+    explanation: "Innovation often comes disguised as a glitch. Lean into unexpected outcomes.",
   },
   {
     message: "Running on passion & pink 💗",
-    explanation: "Your energy is your superpower. Let it sparkle through every commit and component."
-  }
+    explanation: "Your energy is your superpower. Let it sparkle through every commit and component.",
+  },
 ];
 
 const Cube: React.FC = () => {
@@ -53,6 +54,7 @@ const Cube: React.FC = () => {
   const autoRotate = useRef(true);
   const animationFrameId = useRef<number>();
   const [selectedQuote, setSelectedQuote] = useState<{ message: string; explanation: string } | null>(null);
+  const [worldEntered, setWorldEntered] = useState(false); // ✅ Controls entry into 3D world
 
   useEffect(() => {
     const rotateCube = () => {
@@ -60,7 +62,7 @@ const Cube: React.FC = () => {
         rotation.current.y += 0.2;
         gsap.set(cubeRef.current, {
           rotateY: rotation.current.y,
-          rotateX: rotation.current.x
+          rotateX: rotation.current.x,
         });
       }
       animationFrameId.current = requestAnimationFrame(rotateCube);
@@ -95,14 +97,22 @@ const Cube: React.FC = () => {
         setTimeout(() => {
           setSelectedQuote(randomQuote);
         }, 500);
-      }
+      },
     });
+  };
+
+  const handleEnterWorld = () => {
+    setWorldEntered(true);
   };
 
   const handleRetry = () => {
     setSelectedQuote(null);
     autoRotate.current = true;
   };
+
+  if (worldEntered) {
+    return <NeonGridWorld />; // ✅ Show the 3D world when triggered
+  }
 
   return (
     <div className="cube-container">
@@ -122,6 +132,7 @@ const Cube: React.FC = () => {
           <h2 className="quote-message">{selectedQuote.message}</h2>
           <p className="quote-explanation">{selectedQuote.explanation}</p>
           <button className="retry-button" onClick={handleRetry}>↻ New Quote</button>
+          <button className="enter-button" onClick={handleEnterWorld}>🌐 Enter World</button>
         </div>
       )}
     </div>
