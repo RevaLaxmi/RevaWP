@@ -11,7 +11,7 @@ const NeonGridWorld = () => {
         <ambientLight intensity={0.5} />
         <directionalLight position={[5, 5, 5]} intensity={0.8} />
         <OrbitControls />
-        <gridHelper args={[100, 100, 'cyan', 'magenta']} />
+        {/* <gridHelper args={[100, 100, 'cyan', 'magenta']} /> */}
         <Particles />
         <FloatingShapes />
       </Canvas>
