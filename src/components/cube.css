@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&family=Orbitron:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&display=swap');
 
 .cube-container {
   perspective: 1000px;
   width: 100%;
   height: 100vh;
-  background: linear-gradient(135deg, #ffccd5, #ffc1e3); /* Light pink to baby pink */
+  background: linear-gradient(135deg, #ffccd5, #ffc1e3);
   background-size: 200% 200%;
   animation: bgShift 10s ease infinite;
   display: flex;
@@ -33,16 +33,15 @@
   position: absolute;
   width: 200px;
   height: 200px;
-  background: linear-gradient(135deg, #ffccd5, #ffc1e3); /* Matching background */
-  border: 1px solid #ffffff; /* White border */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 0.85rem;
-  font-family: 'Orbitron', sans-serif;
-  color: #000000;
+  background: linear-gradient(135deg, #ffccd5, #ffc1e3);
+  border: 1px solid #ffffff;
   animation: pulseGlow 2s infinite ease-in-out;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4); /* Soft white glow */
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+  backface-visibility: hidden;
+}
+
+.face:hover {
+  box-shadow: 0 0 30px #ffffff;
 }
 
 @keyframes pulseGlow {
@@ -61,36 +60,43 @@
 .top    { transform: rotateX(90deg) translateZ(100px); }
 .bottom { transform: rotateX(-90deg) translateZ(100px); }
 
-.face:hover {
-  box-shadow: 0 0 30px #ffffff;
-}
-
 .cube:active {
   cursor: grabbing;
 }
 
-.cube-buttons {
-  margin-top: 200px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-}
-
-.cube-buttons button {
-  background-color: #ff69b4;
-  color: #ffffff;
+/* Message box below the cube */
+.quote-box {
+  max-width: 400px;
+  margin-top: 2rem;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
   font-family: 'Chakra Petch', sans-serif;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  padding: 10px 16px;
-  border-radius: 6px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+  text-align: center;
+  animation: fadeIn 0.6s ease-out forwards;
 }
 
-.cube-buttons button:hover {
-  background-color: #ff85c1;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+.quote-message {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.quote-explanation {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.4;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

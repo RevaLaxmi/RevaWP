@@ -1,16 +1,59 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./cube.css";
 import { gsap } from "gsap";
+
+// Feel-good STEM quotes with explanations
+const quotes = [
+  {
+    message: "✨ You're crushing it ✨",
+    explanation: "Every bug you fix and line you write brings you closer to mastery. Keep pushing forward!"
+  },
+  {
+    message: "Built with brain & heart 💡❤️",
+    explanation: "Great code isn’t just logic—it’s crafted with passion, empathy, and brilliance."
+  },
+  {
+    message: "Debugging is love 🛠️",
+    explanation: "Finding bugs means you care enough to make it better. Debugging is part of the love story of engineering."
+  },
+  {
+    message: "Keep building 💪",
+    explanation: "Your projects are your footprints in the digital world. Keep laying those bricks!"
+  },
+  {
+    message: "Take a breath, you're doing great 🌸",
+    explanation: "Tech is intense—remember to pause, breathe, and appreciate how far you’ve come."
+  },
+  {
+    message: "Pixel perfect, heart full 💖",
+    explanation: "Design and logic blend when you create with love. And your users feel it!"
+  },
+  {
+    message: "You’re *the* main character 🎬",
+    explanation: "In your coding journey, you're the hero—navigating bugs, features, and breakthroughs."
+  },
+  {
+    message: "Code. Dance. Repeat 💃💻",
+    explanation: "Balance is key. Code hard, vibe harder. Creativity thrives when you’re playful too."
+  },
+  {
+    message: "Glitch? Nah, it's a feature 😉",
+    explanation: "Innovation often comes disguised as a glitch. Lean into unexpected outcomes."
+  },
+  {
+    message: "Running on passion & pink 💗",
+    explanation: "Your energy is your superpower. Let it sparkle through every commit and component."
+  }
+];
 
 const Cube: React.FC = () => {
   const cubeRef = useRef<HTMLDivElement>(null);
   const rotation = useRef({ x: 0, y: 0 });
-  const isDragging = useRef(false);
-  const lastMouse = useRef({ x: 0, y: 0 });
   const autoRotate = useRef(true);
   const animationFrameId = useRef<number>();
+  const [selectedQuote, setSelectedQuote] = useState<{ message: string; explanation: string } | null>(null);
 
   useEffect(() => {
     const rotateCube = () => {
@@ -18,7 +61,7 @@ const Cube: React.FC = () => {
         rotation.current.y += 0.2;
         gsap.set(cubeRef.current, {
           rotateY: rotation.current.y,
-          rotateX: rotation.current.x,
+          rotateX: rotation.current.x
         });
       }
       animationFrameId.current = requestAnimationFrame(rotateCube);
@@ -31,66 +74,51 @@ const Cube: React.FC = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const handleMouseDown = (e: MouseEvent) => {
-      isDragging.current = true;
-      autoRotate.current = false;
-      lastMouse.current = { x: e.clientX, y: e.clientY };
-    };
+  const handleCubeClick = () => {
+    if (!cubeRef.current) return;
 
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!isDragging.current || !cubeRef.current) return;
+    autoRotate.current = false;
+    setSelectedQuote(null); // hide old quote
 
-      const dx = e.clientX - lastMouse.current.x;
-      const dy = e.clientY - lastMouse.current.y;
+    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
-      rotation.current.y += dx * 0.5;
-      rotation.current.x -= dy * 0.5;
+    const x = Math.floor(Math.random() * 4) * 90;
+    const y = Math.floor(Math.random() * 4) * 90;
 
-      gsap.set(cubeRef.current, {
-        rotateY: rotation.current.y,
-        rotateX: rotation.current.x,
-      });
+    rotation.current.x = x;
+    rotation.current.y = y;
 
-      lastMouse.current = { x: e.clientX, y: e.clientY };
-    };
-
-    const handleMouseUp = () => {
-      isDragging.current = false;
-      autoRotate.current = true;
-    };
-
-    window.addEventListener("mousedown", handleMouseDown);
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseup", handleMouseUp);
-
-    return () => {
-      window.removeEventListener("mousedown", handleMouseDown);
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
-    };
-  }, []);
+    gsap.to(cubeRef.current, {
+      rotateX: x,
+      rotateY: y,
+      duration: 1,
+      ease: "power2.out",
+      onComplete: () => {
+        setTimeout(() => {
+          setSelectedQuote(randomQuote);
+          autoRotate.current = true;
+        }, 500);
+      }
+    });
+  };
 
   return (
     <div className="cube-container">
-      <div className="cube" ref={cubeRef}>
-        <div className="face front">Aerial Classes</div>
-        <div className="face back">Project Collaborations</div>
-        <div className="face left">Client Sessions</div>
-        <div className="face right">reva.chauhan1@gmail.com</div>
-        <div className="face top">+91 97736 39004</div>
-        <div className="face bottom">Instagram: @revalaxmi</div>
+      <div className="cube" ref={cubeRef} onClick={handleCubeClick}>
+        <div className="face front"></div>
+        <div className="face back"></div>
+        <div className="face left"></div>
+        <div className="face right"></div>
+        <div className="face top"></div>
+        <div className="face bottom"></div>
       </div>
 
-      {/* Buttons below the cube */}
-      <div className="cube-buttons">
-        <button>Aerial Classes</button>
-        <button>Project Collaborations</button>
-        <button>Client Sessions</button>
-        <button>Email</button>
-        <button>Phone</button>
-        <button>Instagram</button>
-      </div>
+      {selectedQuote && (
+        <div className="quote-box">
+          <h2 className="quote-message">{selectedQuote.message}</h2>
+          <p className="quote-explanation">{selectedQuote.explanation}</p>
+        </div>
+      )}
     </div>
   );
 };
