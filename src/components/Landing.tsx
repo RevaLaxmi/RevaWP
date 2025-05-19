@@ -41,7 +41,7 @@ export default function Landing({ onFinish }: { onFinish: () => void }) {
   return (
     <>
       <Head>
-        <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet" />
+        <link href="@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');" rel="stylesheet" />
       </Head>
 
       <div

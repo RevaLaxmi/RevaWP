@@ -21,7 +21,7 @@ const FlipCard: React.FC<FlipCardProps> = ({ front, back, style }) => {
 
   const getCardStyle = (content: React.ReactNode) => ({
     ...style,
-    backgroundColor: '#FFB6C1',
+    backgroundColor: '#000000',
     display: 'flex',
     alignItems: isText(content) ? 'center' : 'initial',
     justifyContent: isText(content) ? 'center' : 'initial',
@@ -33,6 +33,8 @@ const FlipCard: React.FC<FlipCardProps> = ({ front, back, style }) => {
     boxSizing: 'border-box',
     overflow: 'hidden',
     position: 'relative',
+    border: '0.9px #ddd',           // subtle light border
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // slight soft shadow
   });
 
   return (

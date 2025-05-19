@@ -22,7 +22,6 @@ const SpotlightReveal: React.FC = () => {
         width: '100vw',
         overflow: 'hidden',
         display: 'flex',
-        fontFamily: 'sans-serif',
       }}
     >
       {/* Spotlight Circle */}
@@ -45,17 +44,18 @@ const SpotlightReveal: React.FC = () => {
         <div
         style={{
             flex: 1,
-            backgroundColor: 'pink',
+            backgroundColor: 'black',
             color: 'white',
             display: 'flex',
             alignItems: 'center', // centers horizontally within the flex child
             justifyContent: 'center', // centers vertically within the full height
             padding: '3rem',
             zIndex: 1,
+            
         }}
         >
         <div style={{ textAlign: 'left', maxWidth: '80%' }}>
-            <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Hi, I'm Reva</h1>
+            <h1 style={{ fontSize: '4.5rem', marginBottom: '1rem' }}>Hi, I'm Reva</h1>
             <p style={{ fontSize: '1.2rem' }}>Here's a bit about me...</p>
         </div>
         </div>

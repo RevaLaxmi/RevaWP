@@ -7,11 +7,11 @@ import NeonGridWorld from "./NeonGridWorld"; // ✅ Import your 3D world
 
 const quotes = [
   {
-    message: "✨ You're crushing it ✨",
+    message: "You're crushing it",
     explanation: "Every bug you fix and line you write brings you closer to mastery. Keep pushing forward!",
   },
   {
-    message: "Built with brain & heart 💡❤️",
+    message: "Built with brain & heart",
     explanation: "Great code isn’t just logic—it’s crafted with passion, empathy, and brilliance.",
   },
   {
@@ -19,31 +19,31 @@ const quotes = [
     explanation: "Finding bugs means you care enough to make it better. Debugging is part of the love story of engineering.",
   },
   {
-    message: "Keep building 💪",
+    message: "Keep building",
     explanation: "Your projects are your footprints in the digital world. Keep laying those bricks!",
   },
   {
-    message: "Take a breath, you're doing great 🌸",
+    message: "Take a breath, you're doing great",
     explanation: "Tech is intense—remember to pause, breathe, and appreciate how far you’ve come.",
   },
   {
-    message: "Pixel perfect, heart full 💖",
+    message: "Pixel perfect, heart full",
     explanation: "Design and logic blend when you create with love. And your users feel it!",
   },
   {
-    message: "You’re *the* main character 🎬",
+    message: "You’re *the* main character",
     explanation: "In your coding journey, you're the hero—navigating bugs, features, and breakthroughs.",
   },
   {
-    message: "Code. Dance. Repeat 💃💻",
+    message: "Code. Dance. Repeat",
     explanation: "Balance is key. Code hard, vibe harder. Creativity thrives when you’re playful too.",
   },
   {
-    message: "Glitch? Nah, it's a feature 😉",
+    message: "Glitch? Nah, it's a feature",
     explanation: "Innovation often comes disguised as a glitch. Lean into unexpected outcomes.",
   },
   {
-    message: "Running on passion & pink 💗",
+    message: "Running on passion & pink",
     explanation: "Your energy is your superpower. Let it sparkle through every commit and component.",
   },
 ];
@@ -110,9 +110,6 @@ const Cube: React.FC = () => {
     autoRotate.current = true;
   };
 
-  if (worldEntered) {
-    return <NeonGridWorld />; // ✅ Show the 3D world when triggered
-  }
 
   return (
     <div className="cube-container">
@@ -132,7 +129,6 @@ const Cube: React.FC = () => {
           <h2 className="quote-message">{selectedQuote.message}</h2>
           <p className="quote-explanation">{selectedQuote.explanation}</p>
           <button className="retry-button" onClick={handleRetry}>↻ New Quote</button>
-          <button className="enter-button" onClick={handleEnterWorld}>🌐 Enter World</button>
         </div>
       )}
     </div>

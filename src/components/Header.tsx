@@ -6,12 +6,14 @@ const Header: React.FC = () => {
     <header style={styles.header}>
       <nav style={styles.nav}>
         <ul style={styles.navList}>
-          <li style={styles.navItem}><Link href="/">Home</Link></li>
-          <li style={styles.navItem}><Link href="/about">About</Link></li>
-          <li style={styles.navItem}><Link href="/projects">Projects</Link></li>
-          <li style={styles.navItem}><Link href="/contact">Contact</Link></li>
+          <li style={styles.navItem}><Link href="/">HOME</Link></li>
+          <li style={styles.navItem}><Link href="/about">ABOUT</Link></li>
+          <li style={styles.navItem}><Link href="/projects">PROJECTS</Link></li>
+          <li style={styles.navItem}><Link href="/contact">CONTACT</Link></li>
           <li style={styles.navItem}><Link href="/work">Work</Link></li>
           <li style={styles.navItem}><Link href="/chat">Chat</Link></li>
+          <li style={styles.navItem}><Link href="/simulation">simulation</Link></li>
+
         </ul>
       </nav>
     </header>
@@ -38,8 +40,9 @@ const styles = {
   },
   navItem: {
     fontSize: '16px',
+    fontWeight: 600, // makes font thicker
     textDecoration: 'none',
-    color: '#333',
+    color: '#00000',
     transition: 'color 0.3s ease',
   },
 };

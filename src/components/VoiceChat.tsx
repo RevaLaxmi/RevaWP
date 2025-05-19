@@ -50,7 +50,7 @@ const VoiceChat = () => {
   }, []);
 
   return (
-    <div style={{ padding: '2rem', fontFamily: 'monospace' }}>
+    <div style={{ padding: '2rem'}}>
       <h2>Talk to the AI</h2>
       <div style={{ marginTop: '2rem' }}>
         {messages.map((msg, idx) => (
