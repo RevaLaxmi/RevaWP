@@ -14,7 +14,8 @@ const Particles = () => {
 
   return (
     <Points positions={particles}>
-      <PointMaterial transparent color="#ffffff" size={0.2} sizeAttenuation depthWrite={false} />
+      <PointMaterial transparent color="#000000" size={0.2} sizeAttenuation depthWrite={false} />
+
     </Points>
   );
 };

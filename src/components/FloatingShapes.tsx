@@ -1,3 +1,4 @@
+//FloatingShaped.tsx
 import { useRef } from 'react';
 import { useFrame, useLoader } from '@react-three/fiber';
 import * as THREE from 'three';
@@ -41,9 +42,11 @@ const FloatingShapes = () => {
           <sphereGeometry args={[0.75, 64, 64]} /> {/* smoother sphere */}
           <meshStandardMaterial
             map={texture}
+            color="#ffffff" // apply a soft light tint
             metalness={0.4}
             roughness={0.7}
           />
+
         </mesh>
       ))}
     </>
