@@ -1,3 +1,4 @@
+// page.tsx -> simulation
 "use client";
 
 import React from "react";

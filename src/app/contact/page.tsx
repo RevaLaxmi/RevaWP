@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Cube from "@/components/cube";
+import Cube from "@/components/Game";
 import SurpriseMode from "@/components/surprisemode";
 
 const ContactPage: React.FC = () => {

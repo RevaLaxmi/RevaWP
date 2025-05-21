@@ -3,7 +3,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./cube.css";
 import { gsap } from "gsap";
-import NeonGridWorld from "./NeonGridWorld"; // ✅ Import your 3D world
 
 const quotes = [
   {
@@ -50,30 +49,48 @@ const quotes = [
 
 const Cube: React.FC = () => {
   const cubeRef = useRef<HTMLDivElement>(null);
+  const smallCubeRef = useRef<HTMLDivElement>(null);
   const rotation = useRef({ x: 0, y: 0 });
   const autoRotate = useRef(true);
   const animationFrameId = useRef<number>();
   const [selectedQuote, setSelectedQuote] = useState<{ message: string; explanation: string } | null>(null);
-  const [worldEntered, setWorldEntered] = useState(false); // ✅ Controls entry into 3D world
 
   useEffect(() => {
+    // Set initial diamond angle for outer cube (diamond shape)
+    rotation.current.x = 45;
+    rotation.current.y = 45;
+  
+    // Outer cube continuous rotation loop with diamond base angle
     const rotateCube = () => {
       if (autoRotate.current && cubeRef.current) {
-        rotation.current.y += 0.2;
+        rotation.current.y += 0.3;
         gsap.set(cubeRef.current, {
-          rotateY: rotation.current.y,
           rotateX: rotation.current.x,
+          rotateY: rotation.current.y,
         });
       }
       animationFrameId.current = requestAnimationFrame(rotateCube);
     };
-
+  
     animationFrameId.current = requestAnimationFrame(rotateCube);
-
+  
+    // Inner small cube continuous spin with GSAP (normal orientation)
+    if (smallCubeRef.current) {
+      gsap.to(smallCubeRef.current, {
+        rotateX: "+=360",
+        rotateY: "+=360",
+        duration: 20,
+        ease: "none",
+        repeat: -1,
+      });
+    }
+  
     return () => {
       if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
+      gsap.killTweensOf(smallCubeRef.current);
     };
   }, []);
+  
 
   const handleCubeClick = () => {
     if (!cubeRef.current) return;
@@ -101,38 +118,68 @@ const Cube: React.FC = () => {
     });
   };
 
-  const handleEnterWorld = () => {
-    setWorldEntered(true);
-  };
-
   const handleRetry = () => {
     setSelectedQuote(null);
     autoRotate.current = true;
   };
 
-
   return (
-    <div className="cube-container">
-      {!selectedQuote && (
-        <div className="cube" ref={cubeRef} onClick={handleCubeClick}>
-          <div className="face front"></div>
-          <div className="face back"></div>
-          <div className="face left"></div>
-          <div className="face right"></div>
-          <div className="face top"></div>
-          <div className="face bottom"></div>
-        </div>
-      )}
+    <div className="background-wrapper">
+      <div className="cube-container">
+        {!selectedQuote && (
+          <div className="cube" ref={cubeRef} onClick={handleCubeClick}>
+            {/* Outer big cube faces */}
+            <div className="face front"></div>
+            <div className="face back"></div>
+            <div className="face left"></div>
+            <div className="face right"></div>
+            <div className="face top"></div>
+            <div className="face bottom"></div>
 
-      {selectedQuote && (
-        <div className="quote-box">
-          <h2 className="quote-message">{selectedQuote.message}</h2>
-          <p className="quote-explanation">{selectedQuote.explanation}</p>
-          <button className="retry-button" onClick={handleRetry}>↻ New Quote</button>
-        </div>
-      )}
+            {/* Inner small cube with its own ref */}
+            <div className="small-cube" ref={smallCubeRef}>
+              <div className="face front"></div>
+              <div className="face back"></div>
+              <div className="face left"></div>
+              <div className="face right"></div>
+              <div className="face top"></div>
+              <div className="face bottom"></div>
+            </div>
+          </div>
+        )}
+
+        {selectedQuote && (
+          <div className="quote-box">
+            <h2 className="quote-message">{selectedQuote.message}</h2>
+            <p className="quote-explanation">{selectedQuote.explanation}</p>
+            <button className="retry-button" onClick={handleRetry}>
+              ↻ New Quote
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 
+
+
+
+
 export default Cube;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
