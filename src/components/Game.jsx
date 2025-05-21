@@ -3,152 +3,194 @@ import './Game.css';
 
 const Game = () => {
   const canvasRef = useRef(null);
+  const animationRef = useRef(null);
   const [isGameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
 
-  useEffect(() => {
+  const dinoRef = useRef({ x: 50, y: 150, width: 40, height: 40, vy: 0, jumping: false });
+  const gravity = 0.44;
+  const ground = 220;
+  const obstaclesRef = useRef([]);
+  const lastObstacleTimeRef = useRef(0);
+  const obstacleDelayRef = useRef(1200 + Math.random() * 800);
+  const gameSpeedRef = useRef(5);
+
+  // Preload images
+  const dinoImg = new Image();
+  dinoImg.src = '/dino1.png';
+
+  const cactusImg = new Image();
+  cactusImg.src = '/cactus.png';
+
+  const reset = () => {
+    setScore(0);
+    setGameOver(false);
+    obstaclesRef.current = [];
+    dinoRef.current.y = ground - dinoRef.current.height;
+    dinoRef.current.vy = 0;
+    dinoRef.current.jumping = false;
+    gameSpeedRef.current = 3;
+    lastObstacleTimeRef.current = Date.now();
+    animate();
+  };
+
+  const jump = () => {
+    const dino = dinoRef.current;
+    if (!dino.jumping) {
+      dino.vy = -12;
+      dino.jumping = true;
+    }
+  };
+
+  const createObstacle = (canvas) => {
+    const minWidth = 15, maxWidth = 40, minHeight = 20, maxHeight = 60;
+    const width = minWidth + Math.random() * (maxWidth - minWidth);
+    const height = minHeight + Math.random() * (maxHeight - minHeight);
+    const y = ground - height;
+
+    obstaclesRef.current.push({ x: canvas.width, y, width, height });
+    obstacleDelayRef.current = 1200 + Math.random() * 800;
+  };
+
+  const animate = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
+    const dino = dinoRef.current;
+    const obstacles = obstaclesRef.current;
 
-    const dino = { x: 50, y: 150, width: 40, height: 40, vy: 0, jumping: false };
-    const gravity = 0.7;
-    const ground = 200;
-    let obstacles = [];
-    let gameSpeed = 5;
-    let animationId;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#f8f8f8';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Load images
-    const dinoImg = new Image();
-    dinoImg.src = '/dino1.png';
+    // Ground
+    ctx.fillStyle = '#ddd';
+    ctx.fillRect(0, ground, canvas.width, 2.5);
 
-    const cactusImg = new Image();
-    cactusImg.src = '/cactus.png';
-
-    // Obstacle timing
-    let lastObstacleTime = 0;
-    let obstacleDelay = 1200 + Math.random() * 800; // 1.2s - 2s
-
-    const jump = () => {
-      if (!dino.jumping) {
-        dino.vy = -15;
-        dino.jumping = true;
-      }
-    };
-
-    const createObstacle = () => {
-      obstacles.push({
-        x: canvas.width,
-        y: ground - 25,
-        width: 20,
-        height: 25
-      });
-      obstacleDelay = 1200 + Math.random() * 800;
-    };
-
-    const reset = () => {
-      setScore(0);
-      setGameOver(false);
-      obstacles = [];
+    // Dino physics
+    dino.y += dino.vy;
+    dino.vy += gravity;
+    if (dino.y > ground - dino.height) {
       dino.y = ground - dino.height;
       dino.vy = 0;
       dino.jumping = false;
-      gameSpeed = 2;
-      lastObstacleTime = Date.now();
-      animate();
-    };
+    }
 
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Dino drawing
+    if (dinoImg.complete) {
+      ctx.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
+    } else {
+      ctx.fillStyle = '#222';
+      ctx.fillRect(dino.x, dino.y, dino.width, dino.height);
+    }
 
-      // Background
-      ctx.fillStyle = '#f8f8f8';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // Obstacles
+    const now = Date.now();
+    if (now - lastObstacleTimeRef.current > obstacleDelayRef.current) {
+      createObstacle(canvas);
+      lastObstacleTimeRef.current = now;
+    }
 
-      // Ground
-      ctx.fillStyle = '#ddd';
-      ctx.fillRect(0, ground, canvas.width, 5);
+    for (let i = 0; i < obstacles.length; i++) {
+      const obs = obstacles[i];
+      obs.x -= gameSpeedRef.current;
 
-      // Dino physics
-      dino.y += dino.vy;
-      dino.vy += gravity;
-
-      if (dino.y > ground - dino.height) {
-        dino.y = ground - dino.height;
-        dino.vy = 0;
-        dino.jumping = false;
+      // Collision detection
+      if (
+        dino.x < obs.x + obs.width &&
+        dino.x + dino.width > obs.x &&
+        dino.y < obs.y + obs.height &&
+        dino.y + dino.height > obs.y
+      ) {
+        setGameOver(true);
+        cancelAnimationFrame(animationRef.current);
+        return;
       }
 
-      // Draw dino image (make sure image loaded)
-      if (dinoImg.complete) {
-        ctx.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
+      // Draw obstacle
+      if (cactusImg.complete) {
+        ctx.drawImage(cactusImg, obs.x, obs.y, obs.width, obs.height);
       } else {
-        // fallback rectangle while image loads
-        ctx.fillStyle = '#222';
-        ctx.fillRect(dino.x, dino.y, dino.width, dino.height);
+        ctx.fillStyle = '#e53935';
+        ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
       }
+    }
 
-      // Obstacle logic
-      const now = Date.now();
-      if (now - lastObstacleTime > obstacleDelay) {
-        createObstacle();
-        lastObstacleTime = now;
-      }
+    // Filter out off-screen obstacles
+    obstaclesRef.current = obstacles.filter(obs => obs.x + obs.width > 0);
 
-      for (let i = 0; i < obstacles.length; i++) {
-        const obs = obstacles[i];
-        obs.x -= gameSpeed;
-
-        // Collision detection
-        if (
-          dino.x < obs.x + obs.width &&
-          dino.x + dino.width > obs.x &&
-          dino.y < obs.y + obs.height &&
-          dino.y + dino.height > obs.y
-        ) {
-          setGameOver(true);
-          cancelAnimationFrame(animationId);
-          return;
-        }
-
-        // Draw cactus image (make sure loaded)
-        if (cactusImg.complete) {
-          ctx.drawImage(cactusImg, obs.x, obs.y, obs.width, obs.height);
-        } else {
-          // fallback red block while loading
-          ctx.fillStyle = '#e53935';
-          ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
-        }
-      }
-
-      // Remove off-screen obstacles
-      obstacles = obstacles.filter(obs => obs.x + obs.width > 0);
-
-      // Score update
+    // Update score only if not game over
+    if (!isGameOver) {
       setScore(prev => prev + 1);
+    }
 
-      // Loop
-      animationId = requestAnimationFrame(animate);
-    };
+    // Optional: increase speed every 500 points
+    if (score > 0 && score % 500 === 0) {
+      gameSpeedRef.current += 0.2;
+    }
 
-    document.addEventListener('keydown', (e) => {
+    animationRef.current = requestAnimationFrame(animate);
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
       if (e.code === 'Space') jump();
       if (e.code === 'Enter' && isGameOver) reset();
-    });
+    };
 
+    document.addEventListener('keydown', handleKeyDown);
     reset();
 
-    return () => cancelAnimationFrame(animationId);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      cancelAnimationFrame(animationRef.current);
+    };
   }, [isGameOver]);
 
   return (
-    <div className="game-wrapper">
-      <canvas ref={canvasRef} width={800} height={250}></canvas>
-      <div className="hud">
-        <span>Score: {score}</span>
-        {isGameOver && <div className="game-over">Game Over! Press Enter to Restart</div>}
+    <>
+      <div className="game-wrapper">
+        <canvas ref={canvasRef} width={800} height={250}></canvas>
+        <div className="hud">
+          <span>Score: {score}</span>
+          {isGameOver && (
+            <div className="game-over">
+              Game Over!
+              <button onClick={reset} style={{ marginLeft: '1rem', padding: '0.4rem 1rem' }}>
+                Retry
+              </button>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+  
+      {/* 👇 Add this below the game wrapper */}
+      <div className="contact-section">
+        <div className="contact-links">
+          <a
+            href="https://wa.me/919773639004?text=Hi%20Reva%2C%20hope%20you%E2%80%99re%20doing%20well!%0AI'm%20contacting%20you%20regarding%20..."
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            WhatsApp
+          </a> •
+          <a
+            href="https://instagram.com/yourUsername"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Instagram
+          </a> •
+          <a href="mailto:Reva.chauhan1@gmail.com">Email</a>
+        </div>
+
+        <p className="contact-message">
+          Feel free to reach out for AI projects, creative collaborations, or to join my aerial arts classes — including flying pole, traditional pole, and silks.
+        </p>
+      </div>
+
+    </>
   );
+  
 };
 
 export default Game;

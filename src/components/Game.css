@@ -1,29 +1,27 @@
 body {
   margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding-top: 20vh; /* or any value you like */
   height: 100vh;
 }
 
 .game-wrapper {
   position: relative;
   width: 800px;
-  height: 300px;
-  background: white;
+  height: 300px; 
+  background: rgb(0, 0, 0);
   border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  padding: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.13);
+  padding: 2rem;
+  margin-top: 8rem; /* 👈 shift this block down slightly */
 }
+
 
 canvas {
   display: block;
   border-radius: 8px;
-  border: 1px solid #ddd;
-  background: #f8f8f8;
+  border: 1px solid #000000;
 }
 
 .hud {
@@ -31,10 +29,57 @@ canvas {
   display: flex;
   justify-content: space-between;
   font-size: 16px;
-  color: #333;
+  color: #ffffff;
 }
 
 .game-over {
   color: #e53935;
   font-weight: bold;
+}
+
+
+button {
+  background-color: #222;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+button:hover {
+  background-color: #444;
+}
+
+
+
+
+.contact-section {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 4rem;
+  color: #333;
+}
+
+.contact-links a {
+  color: #000000;
+  text-decoration: none;
+  margin: 0 0.4rem;
+  font-weight: bold;
+  transition: color 0.2s ease;
+}
+
+.contact-links a:hover {
+  color: #8a8a8a;
+}
+
+.contact-message {
+  margin-top: 0.6rem;
+  font-size: 14px;
+  color: #555;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.5;
 }
