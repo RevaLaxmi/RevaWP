@@ -11,15 +11,19 @@ const Game = () => {
     const ctx = canvas.getContext('2d');
 
     const dino = { x: 50, y: 150, width: 40, height: 40, vy: 0, jumping: false };
-    const gravity = 1.5;
+    const gravity = 0.7;
     const ground = 200;
     let obstacles = [];
     let gameSpeed = 5;
     let animationId;
 
+    // Obstacle timing
+    let lastObstacleTime = 0;
+    let obstacleDelay = 1200 + Math.random() * 800; // 1.2s - 2s
+
     const jump = () => {
       if (!dino.jumping) {
-        dino.vy = -20;
+        dino.vy = -15; // Lower jump height = easier control
         dino.jumping = true;
       }
     };
@@ -31,6 +35,7 @@ const Game = () => {
         width: 20,
         height: 25
       });
+      obstacleDelay = 1200 + Math.random() * 800; // new delay for next spawn
     };
 
     const reset = () => {
@@ -40,7 +45,8 @@ const Game = () => {
       dino.y = ground - dino.height;
       dino.vy = 0;
       dino.jumping = false;
-      gameSpeed = 5;
+      gameSpeed = 2;
+      lastObstacleTime = Date.now();
       animate();
     };
 
@@ -69,8 +75,12 @@ const Game = () => {
       ctx.fillStyle = '#222';
       ctx.fillRect(dino.x, dino.y, dino.width, dino.height);
 
-      // Handle obstacles
-      if (Math.random() < 0.02) createObstacle();
+      // Obstacle logic
+      const now = Date.now();
+      if (now - lastObstacleTime > obstacleDelay) {
+        createObstacle();
+        lastObstacleTime = now;
+      }
 
       for (let i = 0; i < obstacles.length; i++) {
         const obs = obstacles[i];
@@ -92,10 +102,10 @@ const Game = () => {
         ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
       }
 
-      // Remove off-screen
+      // Remove off-screen obstacles
       obstacles = obstacles.filter(obs => obs.x + obs.width > 0);
 
-      // Score
+      // Score update
       setScore(prev => prev + 1);
 
       // Loop
