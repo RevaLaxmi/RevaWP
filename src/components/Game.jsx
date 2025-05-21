@@ -17,13 +17,20 @@ const Game = () => {
     let gameSpeed = 5;
     let animationId;
 
+    // Load images
+    const dinoImg = new Image();
+    dinoImg.src = '/dino1.png';
+
+    const cactusImg = new Image();
+    cactusImg.src = '/cactus.png';
+
     // Obstacle timing
     let lastObstacleTime = 0;
     let obstacleDelay = 1200 + Math.random() * 800; // 1.2s - 2s
 
     const jump = () => {
       if (!dino.jumping) {
-        dino.vy = -15; // Lower jump height = easier control
+        dino.vy = -15;
         dino.jumping = true;
       }
     };
@@ -35,7 +42,7 @@ const Game = () => {
         width: 20,
         height: 25
       });
-      obstacleDelay = 1200 + Math.random() * 800; // new delay for next spawn
+      obstacleDelay = 1200 + Math.random() * 800;
     };
 
     const reset = () => {
@@ -71,9 +78,14 @@ const Game = () => {
         dino.jumping = false;
       }
 
-      // Draw dino
-      ctx.fillStyle = '#222';
-      ctx.fillRect(dino.x, dino.y, dino.width, dino.height);
+      // Draw dino image (make sure image loaded)
+      if (dinoImg.complete) {
+        ctx.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
+      } else {
+        // fallback rectangle while image loads
+        ctx.fillStyle = '#222';
+        ctx.fillRect(dino.x, dino.y, dino.width, dino.height);
+      }
 
       // Obstacle logic
       const now = Date.now();
@@ -98,8 +110,14 @@ const Game = () => {
           return;
         }
 
-        ctx.fillStyle = '#e53935';
-        ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+        // Draw cactus image (make sure loaded)
+        if (cactusImg.complete) {
+          ctx.drawImage(cactusImg, obs.x, obs.y, obs.width, obs.height);
+        } else {
+          // fallback red block while loading
+          ctx.fillStyle = '#e53935';
+          ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+        }
       }
 
       // Remove off-screen obstacles
