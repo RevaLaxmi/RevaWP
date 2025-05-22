@@ -7,7 +7,7 @@ const Game = () => {
   const [isGameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
 
-  const dinoRef = useRef({ x: 50, y: 150, width: 40, height: 40, vy: 0, jumping: false });
+  const dinoRef = useRef({ x: 50, y: 150, width: 60, height: 60, vy: 0, jumping: false });
   const gravity = 0.44;
   const ground = 220;
   const obstaclesRef = useRef([]);
@@ -101,10 +101,13 @@ const Game = () => {
         dino.y < obs.y + obs.height &&
         dino.y + dino.height > obs.y
       ) {
-        setGameOver(true);
         cancelAnimationFrame(animationRef.current);
+        requestAnimationFrame(() => {
+          setGameOver(true);
+        });
         return;
       }
+      
 
       // Draw obstacle
       if (cactusImg.complete) {
@@ -184,8 +187,12 @@ const Game = () => {
         </div>
 
         <p className="contact-message">
-          Feel free to reach out for AI projects, creative collaborations, or to join my aerial arts classes — including flying pole, traditional pole, and silks.
+        I'm always open to collaborating on exciting projects and connecting with curious, creative minds. If you're looking for support with AI and tech projects, I bring hands-on experience in building intelligent systems, full-stack development, UI/UX design, and automation using tools in machine learning and computer vision.
         </p>
+        <p className="contact-message">
+        Beyond tech, I offer aerial arts training as a certified instructor, including flying pole, traditional pole, and aerial silks—perfect for anyone from total beginners to experienced movers looking to grow their skills.
+        </p>
+
       </div>
 
     </>

@@ -3,23 +3,86 @@
 import React, { useState } from 'react';
 import styles from './ProjectsGrid.module.css';
 
+
 const projects = [
-  { id: 1, title: "AI Chatbot", description: "An AI-powered chatbot built with NLP.", tags: ['AI/ML'], link: "https://github.com/ai-chatbot", image: "/webdev.png" },
-  { id: 2, title: "Personal Portfolio", description: "A personal portfolio website using React.", tags: ['UI/UX'], link: "https://github.com/portfolio", image: "/webdev.png" },
-  { id: 3, title: "E-commerce App", description: "An e-commerce application with React and Node.js.", tags: ['Web Development'], link: "https://github.com/e-commerce", image: "/webdev.png" },
-  { id: 4, title: "AI Chatbot", description: "An AI-powered chatbot built with NLP.", tags: ['AI/ML'], link: "https://github.com/ai-chatbot", image: "/webdev.png" },
-  { id: 5, title: "Personal Portfolio", description: "A personal portfolio website using React.", tags: ['UI/UX'], link: "https://github.com/portfolio", image: "/webdev.png" },
-  { id: 6, title: "E-commerce App", description: "An e-commerce application with React and Node.js.", tags: ['Web Development'], link: "https://github.com/e-commerce", image: "/webdev.png" },
-  { id: 7, title: "AI Chatbot", description: "An AI-powered chatbot built with NLP.", tags: ['AI/ML'], link: "https://github.com/ai-chatbot", image: "/webdev.png" },
-  { id: 8, title: "Personal Portfolio", description: "A personal portfolio website using React.", tags: ['UI/UX'], link: "https://github.com/portfolio", image: "/webdev.png" },
-  { id: 9, title: "E-commerce App", description: "An e-commerce application with React and Node.js.", tags: ['Web Development'], link: "https://github.com/e-commerce", image: "/webdev.png" },
-  // add more projects ...
+  {
+    id: 1,
+    title: "Aaryan's Personal Website",
+    description: "Designed and developed a clean and modern personal website for a friend using HTML, CSS, and JavaScript. Focused on responsive UI and user experience.",
+    tags: ['Web Development', 'UI/UX'],
+    link: "https://github.com/RevaLaxmi/AaryanNagpal.github.io",
+    image: "/id1.png"
+  },
+  {
+    id: 2,
+    title: "First Personal Website Draft",
+    description: "My initial attempt at a personal website focusing on aerial hoop, pole, and silks. Built with HTML/CSS and JavaScript, hosted on GitHub Pages.",
+    tags: ['Web Development', 'UI/UX'],
+    link: "https://revalaxmi.github.io/RevaLaxmi/",
+    image: "/id2.png"
+  },
+  {
+    id: 3,
+    title: "Current Personal Website",
+    description: "Updated and improved version of my personal portfolio website with better visuals, cleaner code, and enhanced UI/UX.",
+    tags: ['Web Development', 'UI/UX'],
+    link: "", // Replace with actual current site if different
+    image: "/id3.png"
+  },
+  {
+    id: 4,
+    title: "Aerial Silks, Pole & Hoop Site",
+    description: "A niche website to showcase classes, certifications, and media related to aerial silks, pole, and lyra performances. Designed with elegance and clarity.",
+    tags: ['Web Development', 'UI/UX'],
+    link: "https://revalaxmi.github.io/AerialPole-Silks-Lyra/",
+    image: "/id4.png"
+  },
+  {
+    id: 5,
+    title: "Elevate: Resume to Website",
+    description: "Ongoing project that parses uploaded PDFs/resumes using NLP and generates static personal websites. Combines AI/ML and full-stack web development.",
+    tags: ['AI/ML'],
+    link: "https://github.com/RevaLaxmi/Elevate", // Replace if there's a newer repo
+    image: "/id5.png"
+  },
+  {
+    id: 6,
+    title: "Valentine's Memory Game",
+    description: "A fun, themed memory game with Valentine’s/Galentine’s Day vibes. Interactive UI with sweet animations and vanilla JS logic.",
+    tags: ['UI/UX', 'App Development'],
+    link: "https://valentines-memory-game.vercel.app/",
+    image: "/id6.png"
+  },
+  {
+    id: 7,
+    title: "Object Tracker (Tacker)",
+    description: "Built a custom object detection and tracking pipeline using YOLO and DeepSORT. Applied to drone video feeds and real-time footage.",
+    tags: ['AI/ML'],
+    link: "https://github.com/RevaLaxmi/Tracker",
+    image: "/id7.jpg"
+  },
+  {
+    id: 8,
+    title: "Model Predictive Control (MPC)",
+    description: "Implemented MPC for drone flight stabilization. Focus on managing noisy magnetometer data and trajectory correction using ML models.",
+    tags: ['AI/ML'],
+    link: "https://github.com/RevaLaxmi/MPC",
+    image: "/id8.png"
+  },
+  {
+    id: 9,
+    title: "Rock Paper Scissors AI",
+    description: "A real-time Rock Paper Scissors game using hand gesture recognition with OpenCV, YOLOv5, and DeepSORT. Includes a custom UI with live webcam feed and AI opponent.",
+    tags: ['AI/ML'],
+    link: "https://github.com/reva/rps-ai", // replace with actual
+    image: "/id9.jpg"
+  }
 ];
 
 const categories = [
-  { id: 'AI/ML', title: 'AI / ML', description: 'Projects related to Artificial Intelligence and Machine Learning.', image: '/webdev.png' },
-  { id: 'UI/UX', title: 'UI / UX', description: 'Design-focused projects and user experiences.', image: '/webdev.png' },
-  { id: 'Web Development', title: 'Web Development', description: 'Frontend and backend web projects.', image: '/webdev.png' },
+  { id: 'AI/ML', title: 'AI / ML', description: 'Projects related to Artificial Intelligence and Machine Learning.', image: '/aimlid.png' },
+  { id: 'UI/UX', title: 'UI / UX', description: 'Design-focused projects and user experiences.', image: '/uiuxid.png' },
+  { id: 'Web Development', title: 'Web Development', description: 'Frontend and backend web projects.', image: '/webdevid.png' },
 ];
 
 const ProjectsGrid: React.FC = () => {

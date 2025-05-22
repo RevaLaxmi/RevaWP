@@ -89,7 +89,7 @@ const centerLabel2 = (
       lineHeight: 1.1,   // Optional: tweak spacing between potential lines
     }}
   >
-    THINGS I LOVE
+    TOOLS I LOVE
   </div>
 );
 
@@ -104,9 +104,8 @@ const bottomRightLabel = (
       bottom: '5px',
       right: '10px',
       color: 'white',
-      fontSize: '2.6rem',
+      fontSize: '2rem',
       fontWeight: '800',
-      fontFamily: 'Arial Black, sans-serif',
       cursor: 'pointer',
       userSelect: 'none',
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -119,7 +118,7 @@ const bottomRightLabel = (
       window.location.href = 'mailto:your.email@example.com'; // change to your email
     }}
   >
-    Contact Me
+    Contact info & my CV
   </div>
 );
 
@@ -148,7 +147,7 @@ const HomeContent: React.FC = () => {
               {topLeftLabel}
             </div>
           }
-          back="My journey includes diverse roles — from an AI engineer at Johnnette Technologies working on intelligent drone systems, to a web/UI developer at Heads Up For Tails designing pet-focused interfaces. I’ve done automation engineering at DataPod and data analysis for Deutsche Bank, which gave me a solid blend of tech, design, and problem-solving. These experiences shaped how I build: intentional, user-focused, and deeply adaptive across domains."
+          back="Lately, I've been knee-deep in drone guts and machine learning models. From reducing sensor noise in flight data to building intelligent computer vision pipelines, my days have been full of code, propellers, and the occasional caffeine-fueled debugging marathon. On the side, I've been freelancing—crafting custom apps and websites for clients who want tech that doesn't just work but wows. Whether it's security-focused backend logic or buttery-smooth UI design, I’ve been shipping pixel-perfect experiences that fly (sometimes literally)."
           style={{ width: '100%', height: '250px', color:'white' }}
         />
         <FlipCard
@@ -157,7 +156,7 @@ const HomeContent: React.FC = () => {
               {bottomLeftLabel}
             </div>
           }
-          back="Outside of code, I’m a certified aerial silks and pole instructor, a ballet dancer, and a licensed drone pilot. These aren't side notes — they’re core to how I think. Training in movement has taught me balance, flow, and persistence. Performing and teaching helps me communicate clearly, improvise under pressure, and bring a deep sense of embodiment into my design and dev work. I move between the studio and the screen — both ground me."
+          back="When I'm not writing code or hunting down bugs, I’m either choreographing an aerial routine or teaching a pole or ballet class. I also freelance as a designer and developer—building apps and websites for creatives, entrepreneurs, and curious minds. My weekends often include teaching movement, brainstorming UI over iced coffee, and convincing my son that robots can be cool friends. Life’s a mix of dance, design, and development—and I wouldn’t have it any other way."
           style={{ width: '100%', height: '605px', color:'white' }}
         />
       </div>
@@ -166,12 +165,12 @@ const HomeContent: React.FC = () => {
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         <FlipCard
           front={centerLabel}
-          back="A4"
+          back="I'm cooking... something delicious (I hope)"
           style={{ width: '100%', height: '580px' , color:'white'}}
         />
         <FlipCard
           front={centerLabel2}
-          back="Here's my information!"
+          back="Obsidian for deep dive knowledge maps, Figma for designs and wireframing, VS Code (aka home) and finally ChatGPT for planning"
           style={{ width: '100%', height: '275px' , color:'white'}}
         />
       </div>
@@ -191,9 +190,21 @@ const HomeContent: React.FC = () => {
               }}
             />
           }
-          back="Lately, I’ve been building Elevate, a personal resume site generator that uses AI to turn any uploaded CV into a sleek professional website — complete with custom templates and auto-filled content. I’m also designing Peng, a dating app UI inspired by Hinge but with playful animations and intentionality baked into the UX. When I’m not designing UIs, I’m experimenting with AI drone flight systems, combining real-time object tracking and predictive control for smoother autonomous flying."
+          back={
+            <img
+              src="/revacartoon.jpeg"
+              alt="Reva Chauhan"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                borderRadius: '20px',
+              }}
+            />
+          }
           style={{ width: '100%', height: '750px' , color:'white'}}
         />
+
         <FlipCard
           front={
             <div style={{ ...bigTextStyle, textAlign: 'center' }}>
